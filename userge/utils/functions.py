@@ -28,20 +28,20 @@ async def media_to_image(message):
         or replied.video
         or replied.audio
     ):
-        await message.err("`Media Type Is Invalid ! See HELP.`")
+        await message.err("Media Type Is Invalid ! See `help`.")
         return
     if not os.path.isdir(Config.DOWN_PATH):
         os.makedirs(Config.DOWN_PATH)
-    await message.edit("`Ah Shit, Here We Go Again ...`")
+    await message.edit("Ah Shit, Here We Go Again.")
     dls = await message.client.download_media(
         message=message.reply_to_message,
         file_name=Config.DOWN_PATH,
         progress=progress,
-        progress_args=(message, "`Trying to Posses given content`"),
+        progress_args=(message, "Trying to Posses given content."),
     )
     dls_loc = os.path.join(Config.DOWN_PATH, os.path.basename(dls))
     if replied.sticker and replied.sticker.file_name.endswith(".tgs"):
-        await message.edit("Converting Animated Sticker To Image...")
+        await message.edit("Converting Animated Sticker To Image.")
         png_file = os.path.join(Config.DOWN_PATH, "image.png")
         cmd = f"lottie_convert.py --frame 0 -if lottie -of png {dls_loc} {png_file}"
         stdout, stderr = (await runcmd(cmd))[:2]
@@ -54,11 +54,11 @@ async def media_to_image(message):
         stkr_file = os.path.join(Config.DOWN_PATH, "stkr.png")
         os.rename(dls_loc, stkr_file)
         if not os.path.lexists(stkr_file):
-            await message.err("```Sticker not found...```")
+            await message.err("Sticker not found...")
             return
         dls_loc = stkr_file
     elif replied.animation or replied.video:
-        await message.edit("`Converting Media To Image ...`")
+        await message.edit("Converting Media To Image.")
         jpg_file = os.path.join(Config.DOWN_PATH, "image.jpg")
         await take_screen_shot(dls_loc, 0, jpg_file)
         os.remove(dls_loc)
@@ -67,7 +67,7 @@ async def media_to_image(message):
             return
         dls_loc = jpg_file
     elif replied.audio:
-        await message.edit("`Trying to Get thumb from the audio ...`")
+        await message.edit("Trying to Get thumb from the audio.")
         jpg_file = os.path.join(Config.DOWN_PATH, "image.jpg")
         song_file = os.path.join(Config.DOWN_PATH, "song.mp3")
         os.rename(dls_loc, song_file)
@@ -75,11 +75,11 @@ async def media_to_image(message):
         os.remove(song_file)
         if not os.path.lexists(jpg_file):
             await message.err(
-                "`This Audio has no thumbnail, Task Failed Successfully ...`"
+                "This Audio has no thumbnail, Task Failed Successfully."
             )
             return
         dls_loc = jpg_file
-    await message.edit("`Almost Done ...`")
+    await message.edit("Almost Done.")
     return dls_loc
 
 
@@ -156,7 +156,7 @@ def check_owner(func):
                 pass
         else:
             await c_q.answer(
-                "Only My Master can Access This !!\n\n     𝘿𝙚𝙥𝙡𝙤𝙮 𝙮𝙤𝙪𝙧 𝙤𝙬𝙣 𝙐𝙎𝙀𝙍𝙂𝙀-𝙓",
+                "Only [Priest](@Priest9680) can Access This !!\n\n     𝘿𝙚𝙥𝙡𝙤𝙮 𝙮𝙤𝙪𝙧 𝙤𝙬𝙣 𝙐𝙎𝙀𝙍𝙂𝙀-𝙓",
                 show_alert=True,
             )
 
