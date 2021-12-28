@@ -22,7 +22,7 @@ async def progress(
     c_q: CallbackQuery = None,
     delay: int = userge.Config.EDIT_SLEEP_TIMEOUT,
 ) -> None:
-    """progress function"""
+    """Progress function"""
     if message.process_is_canceled:
         await message.client.stop_transmission()
     task_id = f"{message.chat.id}.{message.message_id}"
@@ -32,9 +32,9 @@ async def progress(
         del _TASKS[task_id]
         try:
             if c_q:
-                await c_q.edit_message_text("`finalizing process ...`")
+                await c_q.edit_message_text("Finalizing process.")
             else:
-                await message.try_to_edit("`finalizing process ...`")
+                await message.try_to_edit("Finalizing process.")
         except FloodWait as f_e:
             await asyncio.sleep(f_e.x)
         return
