@@ -10,12 +10,12 @@
 
 
 class StopConversation(Exception):
-    """raise if conversation has terminated"""
+    """Raise if conversation has terminated"""
 
 
 class ProcessCanceled(Exception):
-    """raise if thread has terminated"""
+    """Raise if thread has terminated"""
 
 
 class UsergeBotNotFound(Exception):
-    """raise if userge bot not found"""
+    """Raise if userge bot not found"""
